@@ -1,0 +1,12 @@
+[
+    {
+        "assetnum": "PUMP100",
+        "description": "Water Pump",
+        "status": "INACTIVE"
+    },
+    {
+        "assetnum": "MOTOR200",
+        "description": "Motor",
+        "status": "ACTIVE"
+    }
+]
