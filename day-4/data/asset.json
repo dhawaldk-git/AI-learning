@@ -8,10 +8,5 @@
         "assetnum": "MOTOR200",
         "description": "Motor",
         "status": "ACTIVE"
-    },
-    {
-        "assetnum": "PUMP500",
-        "description": "Water motor pump",
-        "status": "ACTIVE"
     }
 ]

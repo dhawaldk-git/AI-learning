@@ -1,16 +1,22 @@
 
-from asset import Asset
-from asset_manager import AssetManager
-
+from models.asset import Asset
+from services.asset_manager import AssetManager
+import logging
 manager = AssetManager()
 
 # manager.add_asset(Asset("PUMP100", "Water Pump", "ACTIVE"))
 # manager.add_asset(Asset("PUMP100", "Water Pump", "ACTIVE"))
 # manager.add_asset(Asset("MOTOR200", "Motor", "ACTIVE"))
+logging.basicConfig(
+    filename='log/app.log',
+    level= logging.INFO,
+    format= "%(asctime)s - %(levelname)s - %(message)s"
+)
 
-
+logging.info('Application Started')
 while True:
     try:
+        
         print('\n Asset Menu')
         print('1. View asset')
         print('2. Search asset')
@@ -18,15 +24,18 @@ while True:
         print('4. Update asset')
         print('5. Save asset')
         print('6. Load assets')
-        print('7. Exit')
+        print('7. delete asset')
+        print('8. Exit')
         asset_management = int(input('\n Enter value \n')) 
     except ValueError:
             print('Enter value between 1 to 5')
             continue
+
     if asset_management == 1:
         manager.view_assets()
     elif asset_management == 2:
-        assetnum = input('Enter assetnum \n')
+        try: assetnum = input('Enter assetnum \n') 
+        except Exception as e: print(e) 
         asset = manager.search_asset(assetnum)
         if asset:
             asset.display()
@@ -42,7 +51,13 @@ while True:
         status =  input(' Enter status- ')
         asset_dict['status'] = status
         if assetnum and desc and status:
-            manager.add_asset(Asset(assetnum, desc, status))
+            new_asset = Asset(assetnum, desc, status)
+            result = manager.add_asset(new_asset)
+            # print('result',result)
+            if result == 'asset already exist':
+                 logging.warning(f"Asset {assetnum} already exist")
+            else:
+                logging.info(f"Asset {result.assetnum} added")
 
     elif asset_management == 4:
         assetnum = input('Enter assetnum- ')
@@ -59,8 +74,18 @@ while True:
          manager.load_asset()
 
     elif asset_management == 7:
-            print ('Exiting.....')
-            break
+        assetnum = input('Enter assetnum- ')
+        result = manager.delete_asset(assetnum)
+        if result == True:
+            logging.info(f"Asset {assetnum} deleted successfully")
+        else:
+             logging.warning(f"Asset {assetnum} Not found")
+
+    elif asset_management == 8:
+        print ('Exiting.....')
+        logging.info(f"Exit Application")
+        break
+
     else:
         print('Invalid choice')
     
