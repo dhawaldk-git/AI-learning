@@ -1,3 +1,17 @@
 INFO:root:Users retrieved successfully
 INFO:root:Users retrieved successfully
 INFO:root:Users retrieved successfully
+INFO:root:Application Started
+INFO:root:Application Started
+WARNING:root:user data with 10 not found
+INFO:root:Exit Application
+INFO:root:Application Started
+INFO:root:Users retrieved successfully with id
+INFO:root:Exit Application
+INFO:root:Application Started
+INFO:root:Users retrieved successfully with id {user_id}
+INFO:root:Exit Application
+INFO:root:Application Started
+INFO:root:Users retrieved successfully with id 10
+INFO:root:Users retrieved successfully
+INFO:root:Exit Application
