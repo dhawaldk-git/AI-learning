@@ -15,7 +15,7 @@ assets = [
 def get_assets():
     return assets
 
-@app.post("/assets")
+@app.post("/asset")
 def add_asset(asset:Asset):
     assets.append(asset.model_dump())
     print(assets)
@@ -44,3 +44,10 @@ def delete_asset(assetnum):
             assets.remove(asset)
             return {"Message":"asset deleted"}
     raise HTTPException(status_code=404,detail="Asset not found")
+
+@app.get("/search")
+def search_asset(status:str):
+    for asset in assets:
+        if asset['status'] == status:
+            return asset
+    return HTTPException(status_code=404,detail="asset Not matching with status")
